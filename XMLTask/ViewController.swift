@@ -26,26 +26,35 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
     Timer.scheduledTimer(withTimeInterval: 1.0, repeats: true) { _ in
       OperationQueue.main.addOperation { self.header?.updateProgress() }
     }
+
+    Timer.scheduledTimer(withTimeInterval: 5.0, repeats: true) { _ in
+      self.retreiveData()
+      print(self.onAir.playoutItems.first?.title ?? "none")
+    }
   }
 
   private func retreiveData() {
     service.onAirFrom(url: "http://aim.appdata.abc.net.au.edgesuite.net/data/abc/triplej/onair.xml") {
       (result: OnAir?, error: OnAirServiceError?) in
-      self.onAir = result
 
-      if let e = error {
-        print(e)
+      guard let newOnAir = result, error == nil else {
+        print(error!)
         return
       }
 
-      if let imageUrl = self.onAir.egpItem.customFields["image640"] {
-        ImageService.retreiveImage(forUrl: imageUrl) { (image) in
-          OperationQueue.main.addOperation {
-            self.tableView.reloadData()
-            self.background.image = image
-          }
+      if self.onAir == nil ||
+      	 newOnAir.egpItem.id != self.onAir.egpItem.id ||
+        newOnAir.playingItem?.title != self.onAir.playingItem?.title
+      {
+        self.onAir = newOnAir
+        OperationQueue.main.addOperation { self.tableView.reloadData() }
+
+        guard let url = newOnAir.egpItem.customFields["image640"] else { return }
+        ImageService.retreiveImage(forUrl: url.substring(from: url.index(url.startIndex, offsetBy: 1))) { (image) in
+          OperationQueue.main.addOperation { self.background.image = image }
         }
       }
+
     }
   }
 
@@ -100,9 +109,9 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
   func scrollViewDidScroll(_ scrollView: UIScrollView) {
     let offset = tableView.contentOffset.y
     if (offset > 0) { return }
-
+    
     backgroundTop.constant = -20 - offset / 5.0
   }
-
+  
 }
 
