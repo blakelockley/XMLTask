@@ -70,22 +70,46 @@
 		EF256F7A1F00EFDB00DEF572 /* XMLTask */ = {
 			isa = PBXGroup;
 			children = (
-				EF256F7B1F00EFDB00DEF572 /* AppDelegate.swift */,
-				EF256F7D1F00EFDB00DEF572 /* ViewController.swift */,
-				EF256F911F00F16C00DEF572 /* EGPItem.swift */,
-				EF256F951F00FB3C00DEF572 /* OnAirService.swift */,
-				EF256F971F00FB5E00DEF572 /* OnAir.swift */,
-				EF256F931F00F22D00DEF572 /* PlayoutItem.swift */,
-				EF256FA31F0249B000DEF572 /* PlayingCell.swift */,
-				EF256F9D1F0145E900DEF572 /* ImageService.swift */,
-				EF256F9F1F01FBB200DEF572 /* PlayoutItemCell.swift */,
-				EF256FA11F0209C100DEF572 /* HeaderCell.swift */,
+				EF256FA51F027A7800DEF572 /* UI */,
+				EF256FA71F027AAD00DEF572 /* Model */,
+				EF256FA61F027A9100DEF572 /* Services */,
 				EF256F7F1F00EFDB00DEF572 /* Main.storyboard */,
 				EF256F821F00EFDB00DEF572 /* Assets.xcassets */,
 				EF256F841F00EFDB00DEF572 /* LaunchScreen.storyboard */,
 				EF256F871F00EFDB00DEF572 /* Info.plist */,
 			);
 			path = XMLTask;
+			sourceTree = "<group>";
+		};
+		EF256FA51F027A7800DEF572 /* UI */ = {
+			isa = PBXGroup;
+			children = (
+				EF256F7B1F00EFDB00DEF572 /* AppDelegate.swift */,
+				EF256F7D1F00EFDB00DEF572 /* ViewController.swift */,
+				EF256FA11F0209C100DEF572 /* HeaderCell.swift */,
+				EF256F9F1F01FBB200DEF572 /* PlayoutItemCell.swift */,
+				EF256FA31F0249B000DEF572 /* PlayingCell.swift */,
+			);
+			name = UI;
+			sourceTree = "<group>";
+		};
+		EF256FA61F027A9100DEF572 /* Services */ = {
+			isa = PBXGroup;
+			children = (
+				EF256F9D1F0145E900DEF572 /* ImageService.swift */,
+				EF256F951F00FB3C00DEF572 /* OnAirService.swift */,
+			);
+			name = Services;
+			sourceTree = "<group>";
+		};
+		EF256FA71F027AAD00DEF572 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				EF256F971F00FB5E00DEF572 /* OnAir.swift */,
+				EF256F931F00F22D00DEF572 /* PlayoutItem.swift */,
+				EF256F911F00F16C00DEF572 /* EGPItem.swift */,
+			);
+			name = Model;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */

@@ -17,14 +17,14 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
   private var onAir: OnAir!
   private let service = OnAirService()
 
+  private var header: HeaderCell!
+
   override func viewDidLoad() {
     super.viewDidLoad()
     retreiveData()
 
-    Timer.scheduledTimer(withTimeInterval: 0.01, repeats: true) { (timer) in
-      if let cell = self.tableView.cellForRow(at: IndexPath(row: 0, section: 0)) as? PlayingCell {
-        cell.updateProgress()
-      }
+    Timer.scheduledTimer(withTimeInterval: 1.0, repeats: true) { _ in
+      OperationQueue.main.addOperation { self.header?.updateProgress() }
     }
   }
 
@@ -80,9 +80,12 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
       return nil
     }
 
-    let cell = tableView.dequeueReusableCell(withIdentifier: "header") as! HeaderCell
-    cell.initWith(egpItem: onAir.egpItem)
-    return cell.contentView
+    if header == nil {
+      header = tableView.dequeueReusableCell(withIdentifier: "header") as! HeaderCell
+    }
+
+    header.initWith(egpItem: onAir.egpItem)
+    return header.contentView
   }
 
   func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {

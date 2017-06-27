@@ -39,4 +39,24 @@ class EGPItem {
     self.presenter = presenter
   }
 
+  private func durationValue() -> Double {
+    let cs = duration.components(separatedBy: ":")
+    return Double(cs[0])! * 3600 + Double(cs[1])! * 60 + Double(cs[2])!
+  }
+
+  func prettyDuration() -> String {
+    let cs = duration.components(separatedBy: ":").map({ Int($0)! })
+    return (cs[0] > 0) ? "\(cs[0])" : "" + "\(cs[1]):\(cs[2])"
+  }
+
+  func progress() -> Double {
+    let progress = Double(Date().timeIntervalSince(time))
+    let ratio = progress / durationValue()
+
+    return min(ratio, 1.0)
+    
+  }
+  
+
+
 }
