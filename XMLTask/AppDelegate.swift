@@ -8,6 +8,10 @@
 
 import UIKit
 
+//how often the app should retrieve new data
+let reloadInterval: TimeInterval = 10
+let dataURL = "http://aim.appdata.abc.net.au.edgesuite.net/data/abc/triplej/onair.xml"
+
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
@@ -19,4 +23,3 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
   }
 
 }
-

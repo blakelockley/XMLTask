@@ -31,7 +31,7 @@ class PlayoutItem {
 
   private let dateFormatter: DateFormatter = {
     let df = DateFormatter()
-    df.dateFormat = "h:ma"
+    df.dateFormat = "h:mma"
     return df
   }()
 
@@ -58,31 +58,14 @@ class PlayoutItem {
 
   }
 
-  private func durationValue() -> Double {
-    let cs = duration.components(separatedBy: ":")
-    return Double(cs[0])! * 3600 + Double(cs[1])! * 60 + Double(cs[2])!
-  }
-
   func prettyTime() -> String {
     return dateFormatter.string(from: time)
   }
 
+  //removes hours if they are zero
   func prettyDuration() -> String {
     let cs = duration.components(separatedBy: ":").map({ Int($0)! })
     return (cs[0] > 0) ? "\(cs[0])" : "" + "\(cs[1]):\(cs[2])"
   }
-
-  func progress() -> Double {
-    guard status == .playing else {
-      return 0.0
-    }
-
-    let progress = Double(Date().timeIntervalSince(time))
-    let ratio = progress / durationValue()
-
-    return min(ratio, 1.0)
-
-  }
-
 
 }

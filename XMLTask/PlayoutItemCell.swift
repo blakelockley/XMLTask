@@ -28,7 +28,7 @@ class PlayoutItemCell: UITableViewCell {
     activityIndicator.startAnimating()
     albumArt.isHidden = true
 
-    imageService.retreiveImage(forUrl: playoutItem.imageUrl) { (image) in
+    imageService.retrieveImage(forUrl: playoutItem.imageUrl) { (image) in
       //ui updates should be on the main queue
       OperationQueue.main.addOperation {
         self.albumArt.isHidden = false

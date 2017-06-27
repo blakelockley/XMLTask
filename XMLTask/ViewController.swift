@@ -22,24 +22,33 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
 
   override func viewDidLoad() {
     super.viewDidLoad()
-    retreiveData()
+    retrieveData()
 
+    //update progress bar every second
     Timer.scheduledTimer(withTimeInterval: 1.0, repeats: true) { _ in
       OperationQueue.main.addOperation { self.header?.updateProgress() }
     }
 
-    Timer.scheduledTimer(withTimeInterval: 5.0, repeats: true) { _ in
-      self.retreiveData()
-      print(self.onAir.playoutItems.first?.title ?? "none")
+    //retreive new data according to predefinded interval
+    Timer.scheduledTimer(withTimeInterval: reloadInterval, repeats: true) { _ in
+      self.retrieveData()
     }
   }
 
-  private func retreiveData() {
-    service.onAirFrom(url: "http://aim.appdata.abc.net.au.edgesuite.net/data/abc/triplej/onair.xml") {
+  //retrieve new data, if it has changed make UI updates
+  private func retrieveData() {
+    service.onAirFrom(url: dataURL) {
       (result: OnAir?, error: OnAirServiceError?) in
 
       guard let newOnAir = result, error == nil else {
-        print(error!)
+        //Error handing...
+        let alert = UIAlertController(title: "Service Error", message: error!.localizedDescription, preferredStyle: .alert)
+        alert.addAction(UIAlertAction(title: "Try again", style: .default) { _ in
+          self.retrieveData()
+          alert.dismiss(animated: true, completion: nil)
+        })
+
+        self.present(alert, animated: true, completion: nil)
         return
       }
 
@@ -51,7 +60,7 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         OperationQueue.main.addOperation { self.tableView.reloadData() }
 
         guard let url = newOnAir.egpItem.customFields["image640"] else { return }
-        self.imageService.retreiveImage(forUrl: url.substring(from: url.index(url.startIndex, offsetBy: 1))) { (image) in
+        self.imageService.retrieveImage(forUrl: url) { (image) in
           OperationQueue.main.addOperation { self.background.image = image }
         }
       }
@@ -108,6 +117,7 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
 
   //MARK: UIScrollViewDelegate
   func scrollViewDidScroll(_ scrollView: UIScrollView) {
+    //creatse background slide effect
     let offset = tableView.contentOffset.y
     if (offset > 0) { return }
     
@@ -115,4 +125,3 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
   }
   
 }
-

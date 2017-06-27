@@ -30,6 +30,7 @@ class HeaderCell: UITableViewCell {
     updateProgress()
   }
 
+  //how much the program has progressed
   func updateProgress() {
     let progress = CGFloat(item.progress())
     let full = fullBar.frame.width - 2.0 //for borders

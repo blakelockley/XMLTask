@@ -8,12 +8,15 @@
 
 import UIKit
 
+/*
+ * Object to encapsulate retrieving images
+ */
 class ImageService: NSObject, URLSessionDelegate {
 
   private let defaultSession = URLSession(configuration: URLSessionConfiguration.default)
   private var dataTask: URLSessionDataTask!
 
-  func retreiveImage(forUrl url: String, handler: @escaping (UIImage?) -> Void) {
+  func retrieveImage(forUrl url: String, handler: @escaping (UIImage?) -> Void) {
     dataTask?.cancel()
     dataTask = defaultSession.dataTask(with: URL(string: url)!) {
       (data: Data?, urlResponse: URLResponse?, error: Error?) in
