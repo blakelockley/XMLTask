@@ -29,8 +29,7 @@ class PlayoutItem {
   var customFields = [String: String]()
 
   private let imageUrl: String
-  private(set) var image: UIImage?
-
+  //private(set) var image: UIImage?
 
   init?(dict: [String: String]) {
     guard
@@ -53,5 +52,13 @@ class PlayoutItem {
     self.type = type
     self.imageUrl = imageUrl
   }
+
+  func retreiveImage(handler: @escaping (UIImage?) -> Void) {
+    ImageService.retreiveImage(forUrl: imageUrl) { (image) in
+      //self.image = image
+      handler(image)
+    }
+  }
+
 
 }

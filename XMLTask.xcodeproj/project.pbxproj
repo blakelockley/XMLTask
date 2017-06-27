@@ -17,6 +17,7 @@
 		EF256F941F00F22D00DEF572 /* PlayoutItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF256F931F00F22D00DEF572 /* PlayoutItem.swift */; };
 		EF256F961F00FB3C00DEF572 /* OnAirService.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF256F951F00FB3C00DEF572 /* OnAirService.swift */; };
 		EF256F981F00FB5E00DEF572 /* OnAir.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF256F971F00FB5E00DEF572 /* OnAir.swift */; };
+		EF256F9E1F0145E900DEF572 /* ImageService.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF256F9D1F0145E900DEF572 /* ImageService.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -32,6 +33,7 @@
 		EF256F931F00F22D00DEF572 /* PlayoutItem.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PlayoutItem.swift; sourceTree = "<group>"; };
 		EF256F951F00FB3C00DEF572 /* OnAirService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OnAirService.swift; sourceTree = "<group>"; };
 		EF256F971F00FB5E00DEF572 /* OnAir.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OnAir.swift; sourceTree = "<group>"; };
+		EF256F9D1F0145E900DEF572 /* ImageService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImageService.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -71,6 +73,7 @@
 				EF256F951F00FB3C00DEF572 /* OnAirService.swift */,
 				EF256F971F00FB5E00DEF572 /* OnAir.swift */,
 				EF256F931F00F22D00DEF572 /* PlayoutItem.swift */,
+				EF256F9D1F0145E900DEF572 /* ImageService.swift */,
 				EF256F7F1F00EFDB00DEF572 /* Main.storyboard */,
 				EF256F821F00EFDB00DEF572 /* Assets.xcassets */,
 				EF256F841F00EFDB00DEF572 /* LaunchScreen.storyboard */,
@@ -159,6 +162,7 @@
 				EF256F981F00FB5E00DEF572 /* OnAir.swift in Sources */,
 				EF256F941F00F22D00DEF572 /* PlayoutItem.swift in Sources */,
 				EF256F921F00F16C00DEF572 /* EGPItem.swift in Sources */,
+				EF256F9E1F0145E900DEF572 /* ImageService.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
