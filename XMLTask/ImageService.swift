@@ -11,14 +11,16 @@ import UIKit
 class ImageService: NSObject, URLSessionDelegate {
 
   private let defaultSession = URLSession(configuration: URLSessionConfiguration.default)
-  private var dataTask:
+  private var dataTask: URLSessionDataTask!
 
   func retreiveImage(forUrl url: String, handler: @escaping (UIImage?) -> Void) {
-    defaultSession.dataTask(with: URL(string: url)!) {
+    dataTask?.cancel()
+    dataTask = defaultSession.dataTask(with: URL(string: url)!) {
       (data: Data?, urlResponse: URLResponse?, error: Error?) in
         let image = data.flatMap(UIImage.init)
         handler(image)
-    }.resume()
+    }
+    dataTask.resume()
   }
 }
   

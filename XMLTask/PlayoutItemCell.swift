@@ -16,6 +16,7 @@ class PlayoutItemCell: UITableViewCell {
   @IBOutlet weak var timeLabel: UILabel!
 
   private(set) var playoutItem: PlayoutItem!
+  private var imageService = ImageService()
 
   func initWith(playoutItem: PlayoutItem) {
     self.playoutItem = playoutItem
@@ -27,9 +28,7 @@ class PlayoutItemCell: UITableViewCell {
     activityIndicator.startAnimating()
     albumArt.isHidden = true
 
-    //Theres a very inconspicuous bug here: images from previously used cells may pop up if the image handler takes
-    //to long to complete (this will be fixed in a seperate commit)
-    ImageService.retreiveImage(forUrl: playoutItem.imageUrl) { (image) in
+    imageService.retreiveImage(forUrl: playoutItem.imageUrl) { (image) in
       //ui updates should be on the main queue
       OperationQueue.main.addOperation {
         self.albumArt.isHidden = false

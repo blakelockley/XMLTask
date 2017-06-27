@@ -16,6 +16,7 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
 
   private var onAir: OnAir!
   private let service = OnAirService()
+  private let imageService = ImageService()
 
   private var header: HeaderCell!
 
@@ -50,7 +51,7 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         OperationQueue.main.addOperation { self.tableView.reloadData() }
 
         guard let url = newOnAir.egpItem.customFields["image640"] else { return }
-        ImageService.retreiveImage(forUrl: url.substring(from: url.index(url.startIndex, offsetBy: 1))) { (image) in
+        self.imageService.retreiveImage(forUrl: url.substring(from: url.index(url.startIndex, offsetBy: 1))) { (image) in
           OperationQueue.main.addOperation { self.background.image = image }
         }
       }
