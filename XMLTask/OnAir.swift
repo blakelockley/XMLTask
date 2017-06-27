@@ -12,6 +12,13 @@ class OnAir {
   let egpItem: EGPItem
   let playoutItems: [PlayoutItem]
 
+  var playingItem: PlayoutItem? {
+    if let p = playoutItems.first, p.status == .playing {
+      return p
+    }
+    return nil
+  }
+
   init(egpItem: EGPItem, playoutItems: [PlayoutItem]) {
     self.egpItem = egpItem
     self.playoutItems = playoutItems

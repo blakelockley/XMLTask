@@ -12,7 +12,6 @@
 		EF256F811F00EFDB00DEF572 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = EF256F7F1F00EFDB00DEF572 /* Main.storyboard */; };
 		EF256F831F00EFDB00DEF572 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = EF256F821F00EFDB00DEF572 /* Assets.xcassets */; };
 		EF256F861F00EFDB00DEF572 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = EF256F841F00EFDB00DEF572 /* LaunchScreen.storyboard */; };
-		EF256F8E1F00F04600DEF572 /* onair.xml in Resources */ = {isa = PBXBuildFile; fileRef = EF256F8D1F00F04600DEF572 /* onair.xml */; };
 		EF256F921F00F16C00DEF572 /* EGPItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF256F911F00F16C00DEF572 /* EGPItem.swift */; };
 		EF256F941F00F22D00DEF572 /* PlayoutItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF256F931F00F22D00DEF572 /* PlayoutItem.swift */; };
 		EF256F961F00FB3C00DEF572 /* OnAirService.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF256F951F00FB3C00DEF572 /* OnAirService.swift */; };
@@ -20,6 +19,7 @@
 		EF256F9E1F0145E900DEF572 /* ImageService.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF256F9D1F0145E900DEF572 /* ImageService.swift */; };
 		EF256FA01F01FBB200DEF572 /* PlayoutItemCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF256F9F1F01FBB200DEF572 /* PlayoutItemCell.swift */; };
 		EF256FA21F0209C100DEF572 /* HeaderCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF256FA11F0209C100DEF572 /* HeaderCell.swift */; };
+		EF256FA41F0249B000DEF572 /* PlayingCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF256FA31F0249B000DEF572 /* PlayingCell.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -30,7 +30,6 @@
 		EF256F821F00EFDB00DEF572 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		EF256F851F00EFDB00DEF572 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		EF256F871F00EFDB00DEF572 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		EF256F8D1F00F04600DEF572 /* onair.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = onair.xml; sourceTree = "<group>"; };
 		EF256F911F00F16C00DEF572 /* EGPItem.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EGPItem.swift; sourceTree = "<group>"; };
 		EF256F931F00F22D00DEF572 /* PlayoutItem.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PlayoutItem.swift; sourceTree = "<group>"; };
 		EF256F951F00FB3C00DEF572 /* OnAirService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OnAirService.swift; sourceTree = "<group>"; };
@@ -38,6 +37,7 @@
 		EF256F9D1F0145E900DEF572 /* ImageService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImageService.swift; sourceTree = "<group>"; };
 		EF256F9F1F01FBB200DEF572 /* PlayoutItemCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PlayoutItemCell.swift; sourceTree = "<group>"; };
 		EF256FA11F0209C100DEF572 /* HeaderCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HeaderCell.swift; sourceTree = "<group>"; };
+		EF256FA31F0249B000DEF572 /* PlayingCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PlayingCell.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -70,13 +70,13 @@
 		EF256F7A1F00EFDB00DEF572 /* XMLTask */ = {
 			isa = PBXGroup;
 			children = (
-				EF256F8D1F00F04600DEF572 /* onair.xml */,
 				EF256F7B1F00EFDB00DEF572 /* AppDelegate.swift */,
 				EF256F7D1F00EFDB00DEF572 /* ViewController.swift */,
 				EF256F911F00F16C00DEF572 /* EGPItem.swift */,
 				EF256F951F00FB3C00DEF572 /* OnAirService.swift */,
 				EF256F971F00FB5E00DEF572 /* OnAir.swift */,
 				EF256F931F00F22D00DEF572 /* PlayoutItem.swift */,
+				EF256FA31F0249B000DEF572 /* PlayingCell.swift */,
 				EF256F9D1F0145E900DEF572 /* ImageService.swift */,
 				EF256F9F1F01FBB200DEF572 /* PlayoutItemCell.swift */,
 				EF256FA11F0209C100DEF572 /* HeaderCell.swift */,
@@ -149,7 +149,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				EF256F861F00EFDB00DEF572 /* LaunchScreen.storyboard in Resources */,
-				EF256F8E1F00F04600DEF572 /* onair.xml in Resources */,
 				EF256F831F00EFDB00DEF572 /* Assets.xcassets in Resources */,
 				EF256F811F00EFDB00DEF572 /* Main.storyboard in Resources */,
 			);
@@ -166,6 +165,7 @@
 				EF256F7C1F00EFDB00DEF572 /* AppDelegate.swift in Sources */,
 				EF256F961F00FB3C00DEF572 /* OnAirService.swift in Sources */,
 				EF256F981F00FB5E00DEF572 /* OnAir.swift in Sources */,
+				EF256FA41F0249B000DEF572 /* PlayingCell.swift in Sources */,
 				EF256FA21F0209C100DEF572 /* HeaderCell.swift in Sources */,
 				EF256F941F00F22D00DEF572 /* PlayoutItem.swift in Sources */,
 				EF256FA01F01FBB200DEF572 /* PlayoutItemCell.swift in Sources */,

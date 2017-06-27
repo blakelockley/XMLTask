@@ -9,7 +9,7 @@
 import UIKit
 
 enum PlayoutItemStatus: String {
-  case history
+  case playing, history
 }
 
 enum PlayoutItemType: String {
@@ -22,14 +22,18 @@ class PlayoutItem {
   let duration: String
   let title: String
   let artist: String
+  let imageUrl: String
 
   let status: PlayoutItemStatus
   let type: PlayoutItemType
 
   var customFields = [String: String]()
 
-  private let imageUrl: String
-  //private(set) var image: UIImage?
+  private let dateFormatter: DateFormatter = {
+    let df = DateFormatter()
+    df.dateFormat = "h:ma"
+    return df
+  }()
 
   init?(dict: [String: String]) {
     guard
@@ -51,13 +55,33 @@ class PlayoutItem {
     self.status = status
     self.type = type
     self.imageUrl = imageUrl
+
   }
 
-  func retreiveImage(handler: @escaping (UIImage?) -> Void) {
-    ImageService.retreiveImage(forUrl: imageUrl) { (image) in
-      //self.image = image
-      handler(image)
+  private func durationValue() -> Double {
+    let cs = duration.components(separatedBy: ":")
+    return Double(cs[0])! * 3600 + Double(cs[1])! * 60 + Double(cs[2])!
+  }
+
+  func prettyTime() -> String {
+    return dateFormatter.string(from: time)
+  }
+
+  func prettyDuration() -> String {
+    let cs = duration.components(separatedBy: ":").map({ Int($0)! })
+    return (cs[0] > 0) ? "\(cs[0])" : "" + "\(cs[1]):\(cs[2])"
+  }
+
+  func progress() -> Double {
+    guard status == .playing else {
+      return 0.0
     }
+
+    let progress = Double(Date().timeIntervalSince(time))
+    let ratio = progress / durationValue()
+
+    return min(ratio, 1.0)
+
   }
 
 

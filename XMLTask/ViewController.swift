@@ -14,27 +14,39 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
   @IBOutlet weak var background: UIImageView!
   @IBOutlet weak var tableView: UITableView!
 
-  var onAir: OnAir!
+  private var onAir: OnAir!
+  private let service = OnAirService()
 
   override func viewDidLoad() {
     super.viewDidLoad()
+    retreiveData()
 
-    let service = OnAirService()
-    service.parse(xml: "/Users/bwl/.Desktop/jobs/XMLTask/XMLTask/onair.xml") {
+    Timer.scheduledTimer(withTimeInterval: 0.01, repeats: true) { (timer) in
+      if let cell = self.tableView.cellForRow(at: IndexPath(row: 0, section: 0)) as? PlayingCell {
+        cell.updateProgress()
+      }
+    }
+  }
+
+  private func retreiveData() {
+    service.onAirFrom(url: "http://aim.appdata.abc.net.au.edgesuite.net/data/abc/triplej/onair.xml") {
       (result: OnAir?, error: OnAirServiceError?) in
       self.onAir = result
 
-      self.tableView.reloadData()
+      if let e = error {
+        print(e)
+        return
+      }
 
       if let imageUrl = self.onAir.egpItem.customFields["image640"] {
         ImageService.retreiveImage(forUrl: imageUrl) { (image) in
           OperationQueue.main.addOperation {
+            self.tableView.reloadData()
             self.background.image = image
           }
         }
       }
     }
-
   }
 
   //MARK: UITableViewDataSource
@@ -47,8 +59,18 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
   }
 
   func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-    let cell = tableView.dequeueReusableCell(withIdentifier: "playout") as! PlayoutItemCell
-    cell.initWith(playoutItem: onAir.playoutItems[indexPath.row])
+    let playout = onAir.playoutItems[indexPath.row]
+
+    let cell: PlayoutItemCell
+
+    if (playout.status == .playing) {
+      cell = tableView.dequeueReusableCell(withIdentifier: "playing") as! PlayingCell
+    } else {
+      cell = tableView.dequeueReusableCell(withIdentifier: "playout") as! PlayoutItemCell
+    }
+
+    cell.initWith(playoutItem: playout)
+
     return cell
   }
 
@@ -60,7 +82,7 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
 
     let cell = tableView.dequeueReusableCell(withIdentifier: "header") as! HeaderCell
     cell.initWith(egpItem: onAir.egpItem)
-    return cell
+    return cell.contentView
   }
 
   func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {

@@ -11,6 +11,7 @@ import Foundation
 enum OnAirServiceError: Error {
   case parsingError(element: String)
   case alreadyParsingError
+  case requestError(error: Error?)
 }
 
 /*
@@ -39,17 +40,28 @@ class OnAirService: NSObject, XMLParserDelegate {
   private var parsingEGPFields = false
   private(set) var parsing: Bool = false
 
-  func parse(xml: String, handler: @escaping ((OnAir?, OnAirServiceError?) -> Void)) {
+  private let defaultSession = URLSession(configuration: URLSessionConfiguration.default)
+  
+  func onAirFrom(url: String, handler: @escaping ((OnAir?, OnAirServiceError?) -> Void)) {
     if parsing {
       handler(nil, OnAirServiceError.alreadyParsingError)
     }
 
     self.handler = handler
 
-    parser = XMLParser(contentsOf: URL(fileURLWithPath: xml))
-    parser?.delegate = self
-    parser?.parse()
+    defaultSession.dataTask(with: URL(string: url)!) {
+      (data: Data?, urlResponse: URLResponse?, error: Error?) in
 
+      guard let xml = data else {
+        self.finish(withError: .requestError(error: error))
+        return
+      }
+
+      self.parser = XMLParser(data: xml)
+      self.parser?.delegate = self
+      self.parser?.parse()
+
+    }.resume()
   }
 
   private func finish(withError error: OnAirServiceError? = nil) {
